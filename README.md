@@ -16,7 +16,7 @@ To-do-list
 * BeautifulSoup --> LXML
 * 使用log模块记录日志
 * ~~https登陆~~
-* crontab定时执行
+* ~~crontab定时执行~~
 * 帮多个账户签到
 * config模块
 
@@ -26,6 +26,17 @@ To-do-list
 
 1. [Requests documentation](http://docs.python-requests.org/en/latest/)
 2. [BeautifulSoup documentation](http://www.crummy.com/software/BeautifulSoup/bs4/doc/)
+
+```
+sudo pip install requests
+sudo pip install BeautifulSoup4
+```
+if already exist
+
+```
+sudo pip install --upgrade requests
+sudo pip install --upgrade BeautifulSoup4
+```
 
 *************************
 
@@ -176,3 +187,15 @@ if sucessful:
 else:
     print "Something wrong."
 ```
+
+
+*************************
+
+crontab
+------------------
+
+use command `crontab -e` add one line to the end.  
+like `10 8 * * * python /home/yxj/Dropbox/python/v2ex.py >/dev/null 2>&1`  
+At every day 8:10 the script will run automatically.
+
+**********************
