@@ -6,13 +6,17 @@ import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
-# username = 'crazyzjj000'  # your v2ex username
-# password = '5012630'  # your v2ex password
-username = 'silicon1024'
-password = 'firefox254'
-login_url = 'http://v2ex.com/signin'
-home_page = 'http://www.v2ex.com'
-mission_url = 'http://www.v2ex.com/mission/daily'
+is_https = True
+# username = '<username>'   # your v2ex username
+# password = '<password>'    # your v2ex password ; if is_https == True use https in next 3 lines.
+login_url = 'https://v2ex.com/signin'  # if your set always use ssl in v2ex setting,set is_https == True.vice-verse set it False
+home_page = 'https://www.v2ex.com'
+mission_url = 'https://www.v2ex.com/mission/daily'
+if not is_https:
+    login_url = login_url[:4] + login_url[6:]
+    home_page = home_page[:4] + home_page[6:]
+    mission_url = mission_url[:4] + mission_url[6:]
+
 UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.152 Safari/537.36"
 
 headers = {
@@ -52,7 +56,7 @@ final_url = home_page + short_url[first_quote+1:last_quote]
 
 page = v2ex_session.get(final_url,headers=headers,verify=False).content
 
-suceessful = make_soup('http://v2ex.com/mission/daily', 'class', 'icon-ok-sign')
+suceessful = make_soup(mission_url, 'class', 'icon-ok-sign')
 if suceessful:
     print "Sucessful."
 else:

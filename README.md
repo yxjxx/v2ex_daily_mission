@@ -15,7 +15,7 @@ To-do-list
 * 连续登陆的天数
 * BeautifulSoup --> LXML
 * 使用log模块记录日志
-* https登陆
+* ~~https登陆~~
 * crontab定时执行
 * 帮多个账户签到
 * config模块
