@@ -22,7 +22,7 @@ To-do-list
 
 使用python模拟浏览器的行为登陆v2ex并领取每日登陆奖励.  
 
-使用的模块有`requests`和`BeautifulSoup`.使用`esay_install`或者`pip`安装.
+使用的模块有`requests`和`BeautifulSoup`.可以使用`esay_install`或者`pip`快速安装.
 
 1. [Requests documentation](http://docs.python-requests.org/en/latest/)
 2. [BeautifulSoup documentation](http://www.crummy.com/software/BeautifulSoup/bs4/doc/)
