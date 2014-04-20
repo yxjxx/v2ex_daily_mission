@@ -97,7 +97,7 @@ print 'done'
 ```
 
 requests 模块Session对象具有非常强大的功能,有post,get等常用方法,而且可以保存连接和cookies.get方法返回一个连接对象,具有很多属性比如content,text,status_code等等.  
-BeautifulSoup 的作用是用来解析html的,上面的代码中表单你有一个'once'值就是BeautifulSoup匹配到的.find方法接收一对值,然后返回与之匹配的HTML tag的整个tag的内容.  
+BeautifulSoup 的作用是用来解析html的,上面的代码中表单里有一个'once'值就是BeautifulSoup匹配到的(once的作用等会介绍).find方法接收一对值,然后返回与之匹配的HTML tag的整个tag的内容.  
 
 ***********************
 
@@ -106,7 +106,7 @@ BeautifulSoup 的作用是用来解析html的,上面的代码中表单你有一�
 step1:访问 http://www.v2ex.com/signin 填写帐号密码,点击登陆.查看Network,可以看到一个POST方法,提交了一个表单.  
 ![Alt text](http://ww4.sinaimg.cn/large/81d2b157gw1efhpb8c4jqj203w03va9y.jpg)
 
-'u':帐号,'p':密码,'next':总是"/",关键是once,查看网页源代码并Ctrl+f查找once发现:  
+'u':帐号,'p':密码,'next':总是"/",关键是once,如果在点击登陆之前查看网页源代码并Ctrl+f查找once的话,会发现:  
 ![Alt text](http://ww4.sinaimg.cn/large/81d2b157jw1efhpi15mjij212c0betb7.jpg)
 
 而且每次都在变化,所以once应该是每一次请求 http://www.v2ex.com/signin 网址时服务器返回的一个随机数.我们用BeautifulSoup找到once的值,填到表单中提交就可以成功登陆了.  
@@ -148,9 +148,9 @@ headers用来伪装浏览器,verify表示http/https,post之后v2ex_session是可
 在浏览器中我们登陆成功之后,跳转到 http://www.v2ex.com/ 即主页,如果当天你没有签到的话,会看到`领取今日登陆奖励的链接`我们点击该链接,跳转到了 http://www.v2ex.com/mission/daily 请求是这样的. 
 ![Alt text](http://ww3.sinaimg.cn/large/81d2b157jw1efhqd1i6h5j20at02omx9.jpg)  
 
-然后可以看到一个`领取X铜币`的按钮.点击该按钮,页面没有跳转只是刷新了一下,在抓包工具中看到实际点击按钮请求的网址是`http://v2ex.com/mission/daily/redeem?once=80093`这样的,又有一个once,根据上次的经验应该是服务器返回的随机数.  
+然后可以看到一个`领取X铜币`的按钮.点击该按钮,页面没有跳转只是刷新了一下,在抓包工具中看到点击按钮实际请求的网址是`http://v2ex.com/mission/daily/redeem?once=80093`这样的,又有一个once,根据上次的经验应该是服务器返回的随机数.  
 ![Alt text](http://ww4.sinaimg.cn/large/81d2b157jw1efhqd1th4uj20dy03lmxg.jpg)  
-也就是说我们只要,组合出上图的网址get一下就可以了.当然两次的once是不样的.  
+也就是说我们只要组合出上图的网址get一下就可以了.当然两次的once是不样的.  
 
 如果在点击领取按钮之前,查看网页源码的话可以发现  
 ![Alt text](http://ww4.sinaimg.cn/large/81d2b157jw1efhqd141jjj210p06b75h.jpg)
@@ -164,7 +164,7 @@ short_url = make_soup('http://v2ex.com/mission/daily', 'class', 'super normal bu
 
 ```
 first_quote = short_url.find("'")
-last_quote = short_url.find("'", first_quote+1) #string的find str.find(str, beg=0 end=len(string))
+last_quote = short_url.find("'", first_quote+1) #str.find(str, beg=0 end=len(string))
 final_url = "http://www.v2ex.com" + short_url[first_quote+1:last_quote]
 # 对short_url进行切片处理 /mission/daily/redeem?once=80093
 # final_url = 'http://v2ex.com/mission/daily/redeem?once=80093'
@@ -194,8 +194,8 @@ else:
 crontab
 ------------------
 
-use command `crontab -e` add one line to the end.  
+Use command `crontab -e` add one line to the end.  
 like `10 8 * * * python /home/yxj/Dropbox/python/v2ex.py >/dev/null 2>&1`  
-At every day 8:10 the script will run automatically.
+At every 8:10 the script will run automatically.
 
 **********************
