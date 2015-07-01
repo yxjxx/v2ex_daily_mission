@@ -41,7 +41,7 @@ step1:访问 http://www.v2ex.com/signin 填写帐号密码,点击登陆.查看Ne
 
 而且每次都在变化,所以once应该是每一次请求 http://www.v2ex.com/signin 网址时服务器返回的一个随机数.我们用BeautifulSoup找到once的值,填到表单中提交就可以成功登陆了.
 
-make_suop 函数:
+make_soup 函数:
 
 ```
 def make_soup(url,tag,name):
