@@ -51,8 +51,8 @@ final_url = home_page + short_url[first_quote+1:last_quote]
 
 page = v2ex_session.get(final_url, headers=headers, verify=True).content
 
-suceessful = make_soup(mission_url, 'class', 'fa fa-ok-sign')
-if suceessful:
-    print ("Sucessful.")
+successful = make_soup(mission_url, 'class', 'fa fa-ok-sign')
+if successful:
+    print ("Successful.")
 else:
     print ("Something wrong.")
