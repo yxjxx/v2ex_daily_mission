@@ -29,15 +29,18 @@ def make_soup(url, tag, name):
     # print soup_result
     return soup_result
 
-once_vaule = make_soup(login_url, 'name', 'once')['value']
+once_vaule = make_soup(login_url,'name','once')['value']
+user_params = make_soup(login_url,'autofocus', 'autofocus')['name']
+password_params = make_soup(login_url,'type', 'password')['name']
 print(once_vaule)
 
 post_info = {
-    'u': username,
-    'p': password,
-    'once': once_vaule,
-    'next': '/'
+    user_params : username,
+    password_params : password,
+    'once' : once_vaule,
+    'next' : '/'
 }
+
 
 resp = v2ex_session.post(login_url, data=post_info,
                          headers=headers, verify=True)
